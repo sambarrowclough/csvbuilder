@@ -15,21 +15,25 @@ export const jsonDataPromptDataHelper = (
     .join("\n");
 
   const headers = fields.map(({ name }) => name).join(",");
-  const exampleRow = fields.map(({ name }) => `example ${name}`).join(",");
 
-  return `You are a helpful CSV generator. You task is to create a CSV document about: ${about}
+  return `You are a helpful CSV generator.
   
-Description of the fields:
-${descriptions}
-
-Your response must only be in CSV format. Example:
-${headers}
-${exampleRow}
-${exampleRow.replace("example ", "example 2 ")}
-${exampleRow.replace("example ", "example 3 ")}
+You task is to create a CSV document about: 
+${about}
+  
+Here is an example of a CSV document:
+"full_name","age","about"
+"sam", 30,"i live in the UK"
 
 Instructions:
-- Only return with CSV
-- Only create ${rows} rows
+- Your response must only be in CSV format.
+- Only create ${rows} rows.
+- Everthing must be in quotes.
+
+Here are the headers of the CSV document:
+${headers}
+
+Here is a list of fields you need to create:
+${descriptions}
 `;
 };

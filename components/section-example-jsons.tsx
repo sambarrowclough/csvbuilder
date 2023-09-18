@@ -49,12 +49,12 @@ export const exampleFormValues: {
       },
       {
         name: "age",
-        inputType: "string",
+        inputType: "number",
         description: "age of the character",
       },
       {
         name: "about",
-        inputType: "number",
+        inputType: "string",
         description: "main traits of the character",
       },
     ],

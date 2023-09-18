@@ -1,3 +1,14 @@
+# Todo
+
+[x] Powered by dark mode
+[x] Doesn't always quote text
+[x] Disclaimer: Also include a disclaimer that the data may not be accurate and should not be used for research or other purposes requiring accurate data
+[x] Broke when adding more than 100 rows: need error state
+[x] powered by Flatfile and openAI
+[] re-design the ui
+[x] download csv btn
+[] choose model
+
 ![og-image](./app/opengraph-image.jpg)
 
 # CSV Builder

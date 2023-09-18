@@ -1,10 +1,13 @@
 "use client";
 
-import * as React from "react";
+import { InputTypeSelect } from "@/components/input-type-select";
 import { Button } from "@/components/ui/button";
 import { Column } from "@/components/ui/column";
-import { Row } from "@/components/ui/row";
 import { Input } from "@/components/ui/input";
+import { Row } from "@/components/ui/row";
+import { FormProps } from "@/hooks/use-playground-form";
+import { TrashIcon } from "@radix-ui/react-icons";
+import * as React from "react";
 import {
   Control,
   Controller,
@@ -12,10 +15,8 @@ import {
   UseFieldArrayAppend,
   UseFieldArrayRemove,
   UseFormHandleSubmit,
+  useForm,
 } from "react-hook-form";
-import { InputTypeSelect } from "@/components/input-type-select";
-import { TrashIcon } from "@radix-ui/react-icons";
-import { FormProps } from "@/hooks/use-playground-form";
 
 type JSONDataFromProps = {
   formProps: {
@@ -25,6 +26,7 @@ type JSONDataFromProps = {
     removeField: UseFieldArrayRemove;
     handleSubmit: UseFormHandleSubmit<FormProps, undefined>;
     handleGenerateJSON: (data: FormProps) => void;
+    errors: any;
   };
   completionProps: {
     isLoading: boolean;
@@ -43,6 +45,7 @@ export default function JSONDataFrom({
     control,
     handleSubmit,
     handleGenerateJSON,
+    errors,
   } = formProps;
   const { isLoading, stop } = completionProps;
 
@@ -66,6 +69,11 @@ export default function JSONDataFrom({
               value={field.value}
               onChange={field.onChange}
               placeholder="Type..."
+              error={
+                errors.prompt && errors.prompt.message
+                  ? errors.prompt.message
+                  : ""
+              }
             />
           )}
         />
@@ -82,8 +90,8 @@ export default function JSONDataFrom({
               message: "This field must be a number",
             },
             max: {
-              value: 50,
-              message: "Must be less than 50",
+              value: 100,
+              message: "Must be less than 100",
             },
             min: {
               value: 1,
@@ -99,7 +107,10 @@ export default function JSONDataFrom({
               type="number"
               title="Limit"
               placeholder="Type..."
-            />
+              error={
+                errors.limit && errors.limit.message ? errors.limit.message : ""
+              }
+            ></Input>
           )}
         />
       </Row>
@@ -127,6 +138,14 @@ export default function JSONDataFrom({
                   value={field.value}
                   onChange={field.onChange}
                   placeholder="Type"
+                  error={
+                    errors.fields &&
+                    errors.fields[index] &&
+                    errors.fields[index].name &&
+                    errors.fields[index].name.message
+                      ? errors.fields[index].name.message
+                      : ""
+                  }
                 />
               )}
             />
@@ -158,6 +177,14 @@ export default function JSONDataFrom({
                   placeholder="Description"
                   value={field.value}
                   onChange={field.onChange}
+                  error={
+                    errors.fields &&
+                    errors.fields[index] &&
+                    errors.fields[index].description &&
+                    errors.fields[index].description.message
+                      ? errors.fields[index].description.message
+                      : ""
+                  }
                 />
               )}
             />

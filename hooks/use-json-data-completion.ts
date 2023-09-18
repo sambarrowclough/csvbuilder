@@ -1,11 +1,11 @@
-import * as React from "react";
-import { useCompletion } from "ai/react";
+import { toast } from "@/components/ui/use-toast";
+import { usePlaygroundForm } from "@/hooks/use-playground-form";
+import { onError } from "@/lib/mutationHandlers";
 import { jsonDataPromptDataHelper } from "@/lib/prompt";
 import { useMutation } from "@tanstack/react-query";
+import { useCompletion } from "ai/react";
 import axios from "axios";
-import { onError } from "@/lib/mutationHandlers";
-import { usePlaygroundForm } from "@/hooks/use-playground-form";
-import { toast } from "@/components/ui/use-toast";
+import * as React from "react";
 
 type FormProps = {
   prompt: string;

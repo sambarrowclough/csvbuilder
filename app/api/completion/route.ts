@@ -1,7 +1,7 @@
-import { kv } from "@vercel/kv";
-import { Configuration, OpenAIApi } from "openai-edge";
-import { OpenAIStream, StreamingTextResponse } from "ai";
 import { Ratelimit } from "@upstash/ratelimit";
+import { kv } from "@vercel/kv";
+import { OpenAIStream, StreamingTextResponse } from "ai";
+import { Configuration, OpenAIApi } from "openai-edge";
 
 export const runtime = "edge";
 
@@ -53,6 +53,7 @@ export async function POST(req: Request) {
 
   const response = await openai.createChatCompletion({
     model: "gpt-3.5-turbo-16k",
+    //model: "gpt-4",
     stream: true,
     messages: [
       {

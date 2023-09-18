@@ -1,16 +1,17 @@
 "use client";
 
-import * as React from "react";
-import useJSONDataCompletion from "@/hooks/use-json-data-completion";
-import JSONDataFrom from "@/components/json-data-form";
 import JSONDataCodeBlock from "@/components/json-data-codeblock";
-import { Column } from "@/components/ui/column";
-import { H1, P, Span } from "@/components/ui/typography";
-import { Step } from "@/components/step";
+import JSONDataFrom from "@/components/json-data-form";
 import { exampleFormValues } from "@/components/section-example-jsons";
+import { Step } from "@/components/step";
 import { Button } from "@/components/ui/button";
+import { Column } from "@/components/ui/column";
 import { Row } from "@/components/ui/row";
+import { H1, P, Span } from "@/components/ui/typography";
+import { toast } from "@/components/ui/use-toast";
+import useJSONDataCompletion from "@/hooks/use-json-data-completion";
 import { FormProps } from "@/hooks/use-playground-form";
+import * as React from "react";
 
 const easySelections = [
   {
@@ -44,6 +45,8 @@ export default function Playground() {
   } = useJSONDataCompletion({
     testimonial: true,
   });
+
+  console.log("errors", errors);
 
   function handleSelectOption(option: FormProps) {
     setValue("prompt", option.prompt);
@@ -94,6 +97,7 @@ export default function Playground() {
                 removeField,
                 handleSubmit,
                 handleGenerateJSON,
+                errors,
               }}
               completionProps={{
                 isLoading,
